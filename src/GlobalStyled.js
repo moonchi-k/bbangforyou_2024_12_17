@@ -12,6 +12,7 @@ img{
 }
 a{
     text-decoration: none;
+    color: black;
 }
 
 @font-face {
@@ -19,5 +20,10 @@ a{
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/RiaSans-ExtraBold.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
+}
+
+body {
+    background-color: #F7F0F2;
+    /* font-family: "Nanum Gothic", serif; */
 }
 `;
