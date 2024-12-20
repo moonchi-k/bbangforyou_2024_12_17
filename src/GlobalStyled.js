@@ -23,7 +23,8 @@ a{
 }
 
 body {
-    background-color: #F7F0F2;
+    /* background-color: #F7F0F2; */
     /* font-family: "Nanum Gothic", serif; */
+    background-color: #f8f7f7;
 }
 `;

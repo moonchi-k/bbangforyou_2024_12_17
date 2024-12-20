@@ -6,9 +6,8 @@ import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 import { All } from "../components/All";
 import { New } from "../components/New";
 import { Rec } from "../components/Rec";
-import { Link } from "react-router-dom";
-import Bookmark from "./Bookmark";
-import { BookMark } from "../components/BookMark";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Wrap = styled.div`
   max-width: 450px;
@@ -18,6 +17,29 @@ const Wrap = styled.div`
   background-color: white;
   overflow-x: hidden;
   overflow-y: scroll;
+
+  form {
+    all: unset;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    width: 100%;
+    display: block;
+
+    input {
+      all: unset;
+      width: 380px;
+      box-sizing: border-box;
+      padding: 15px 0 10px 15px;
+      background-color: #f7f0f2;
+      border-radius: 20px;
+      /* margin-top: 25px; */
+      /* margin-bottom: 25px; */
+    }
+
+    ::placeholder {
+      opacity: 0.5;
+    }
+  }
 `;
 const Logo = styled.div`
   width: 95px;
@@ -50,28 +72,7 @@ const TopCon = styled.div`
 `;
 const Title = styled.div``;
 
-const Form = styled.form`
-  all: unset;
-  margin-top: 25px;
-  margin-bottom: 25px;
-  width: 100%;
-  display: block;
-
-  input {
-    all: unset;
-    width: 380px;
-    box-sizing: border-box;
-    padding: 15px 0 10px 15px;
-    background-color: #f7f0f2;
-    border-radius: 20px;
-    /* margin-top: 25px; */
-    /* margin-bottom: 25px; */
-  }
-
-  ::placeholder {
-    opacity: 0.5;
-  }
-`;
+const Form = styled.form``;
 const SecCon = styled.div`
   width: 100%;
 `;
@@ -153,7 +154,7 @@ const RecCon = styled.div`
 const Thumb = styled.div`
   width: 144px;
   height: 144px;
-  background: url(${(props) => props.bgImg}) no-repeat center / cover;
+  background: url(${(props) => props.bgimg}) no-repeat center / cover;
   margin-bottom: 10px;
   border-radius: 15px;
 `;
@@ -161,7 +162,7 @@ const Thumb = styled.div`
 const RThumb = styled.div`
   width: 144px;
   height: 144px;
-  background: url(${(props) => props.recBg}) no-repeat center / cover;
+  background: url(${(props) => props.recbg}) no-repeat center / cover;
   margin-bottom: 10px;
   border-radius: 15px;
 `;
@@ -188,6 +189,24 @@ const Home = () => {
   };
 
   const randomItem = random(All, 5);
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleInputChange = (event) => {
+    console.log(`1111`);
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault(); // 폼 제출 기본 동작을 막음 (페이지 리로드 방지)
+    if (searchTerm.trim()) {
+      // 검색어가 있을 때 detail 페이지로 리디렉션
+      navigate(`/detail/${encodeURIComponent(searchTerm)}`);
+    } else {
+      alert("검색어를 입력하세요!");
+    }
+  };
+
   return (
     <Wrap>
       <Logo />
@@ -198,8 +217,13 @@ const Home = () => {
           <h5>가볼까요?</h5>
         </Title>
       </TopCon>
-      <Form>
-        <input type="text" placeholder="빵집을 검색해보세요." />
+      <Form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="빵집을 검색해보세요."
+          value={searchTerm}
+          //   onChange={handleInputChange}
+        />
       </Form>
 
       <SecCon>
@@ -215,7 +239,6 @@ const Home = () => {
                     <h4>{bakery.name}</h4>
                     <h5>{bakery.hash}</h5>
                   </Name>
-                  <BookMark />
                 </Desc>
               </Link>
             </ResCon>
@@ -228,7 +251,7 @@ const Home = () => {
         <Arr>
           {New.map((newlist) => (
             <NewCon>
-              <Thumb bgImg={newlist.url}></Thumb>
+              <Thumb bgimg={newlist.url}></Thumb>
               <MTitle>
                 <h5>{newlist.name}</h5>
                 <FontAwesomeIcon
@@ -251,7 +274,7 @@ const Home = () => {
         <Arr>
           {Rec.map((reclist) => (
             <RecCon>
-              <RThumb recBg={reclist.url}></RThumb>
+              <RThumb recbg={reclist.url}></RThumb>
               <MTitle>
                 <h5>{reclist.name}</h5>
                 <FontAwesomeIcon

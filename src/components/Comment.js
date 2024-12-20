@@ -1,26 +1,53 @@
 import { FaRegTrashCan } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { FaArrowCircleUp } from "react-icons/fa";
+import { useParams } from "react-router-dom";
 
 const SComment = styled.div`
-  padding-left: 30px;
-  padding-right: 30px;
+  padding: 30px;
   margin-top: 30px;
+  width: 90%;
+  background-color: white;
+  position: absolute;
+  top: 475px;
+  left: 50%;
+  border-radius: 15px;
+  transform: translateX(-50%);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   h4 {
     margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  form {
+    position: relative;
   }
   input {
     all: unset;
+    box-sizing: border-box;
     width: 100%;
-    height: 30px;
+    height: 40px;
     background-color: #f7f7f7;
-    border-radius: 20px;
-    margin-bottom: 15px;
+    border-radius: 40px;
+    margin-bottom: 30px;
+    padding: 10px;
+    font-size: 14px;
   }
 
   button {
     all: unset;
+    position: absolute;
+    right: 10px;
+    top: 5px;
   }
+`;
+const Break = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: #d9d9d9;
+  opacity: 0.3;
+  margin-bottom: 20px;
 `;
 const View = styled.div`
   h4 {
@@ -28,18 +55,26 @@ const View = styled.div`
     font-size: 14px;
     opacity: 0.7;
   }
+
+  li {
+    font-size: 14px;
+    font-weight: 300;
+  }
 `;
 
 const Comment = () => {
+  const { name } = useParams();
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    const storedComments = JSON.parse(localStorage.getItem("comments"));
+    const storedComments = JSON.parse(localStorage.getItem(name));
     if (storedComments) {
       setComments(storedComments);
     }
-  }, []);
+  }, [name]);
+
+  console.log(name);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -49,7 +84,7 @@ const Comment = () => {
       };
       const newComments = [...comments, newComment];
       setComments(newComments);
-      localStorage.setItem("comments", JSON.stringify(newComments));
+      localStorage.setItem(name, JSON.stringify(newComments));
       setComment("");
     }
   };
@@ -62,7 +97,7 @@ const Comment = () => {
 
   return (
     <SComment>
-      <h4>리뷰</h4>
+      <h4>리뷰작성</h4>
       <form onSubmit={submitHandler}>
         <input
           type="text"
@@ -70,23 +105,13 @@ const Comment = () => {
           onChange={(e) => setComment(e.target.value)}
         ></input>
       </form>
-      <button type="submit">입력</button>
+
+      <Break />
       <View>
-        <h4>댓글</h4>
+        <h4>작성된 리뷰</h4>
         <ul>
           {comments.map((c, index) => (
-            <li key={index}>
-              {c.text}
-              <button
-                onClick={() => deleteHandler(index)}
-                style={{
-                  marginLeft: "10px",
-                  color: "#d9d9d9",
-                }}
-              >
-                <FaRegTrashCan />
-              </button>
-            </li>
+            <li key={index}>{c.text}</li>
           ))}
         </ul>
       </View>

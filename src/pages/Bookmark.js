@@ -4,7 +4,6 @@ const Bookmark = () => {
   const [bookmarkedBakeries, setBookmarkedBakeries] = useState([]);
 
   useEffect(() => {
-    // 로컬 스토리지에서 북마크된 베이커리 목록을 가져옵니다.
     const savedBookmarks =
       JSON.parse(localStorage.getItem("bookmarkedBakeries")) || [];
     setBookmarkedBakeries(savedBookmarks);
