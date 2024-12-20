@@ -7,6 +7,8 @@ import { All } from "../components/All";
 import { New } from "../components/New";
 import { Rec } from "../components/Rec";
 import { Link } from "react-router-dom";
+import Bookmark from "./Bookmark";
+import { BookMark } from "../components/BookMark";
 
 const Wrap = styled.div`
   max-width: 450px;
@@ -213,16 +215,7 @@ const Home = () => {
                     <h4>{bakery.name}</h4>
                     <h5>{bakery.hash}</h5>
                   </Name>
-                  <FontAwesomeIcon
-                    icon={faBookmark}
-                    style={{
-                      marginTop: "3px",
-                      color: "#7c4614",
-                      width: "20px",
-                      height: "20px",
-                      marginRight: "2px",
-                    }}
-                  />
+                  <BookMark />
                 </Desc>
               </Link>
             </ResCon>

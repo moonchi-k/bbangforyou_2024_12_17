@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { CiLocationOn } from "react-icons/ci";
 import { All } from "../components/All";
-import { useState } from "react";
+import Comment from "../components/Comment";
+import { useParams } from "react-router-dom";
 const Wrap = styled.div`
   max-width: 450px;
   height: 100vh;
@@ -59,87 +59,45 @@ const Break = styled.div`
   background-color: #d9d9d9;
   opacity: 0.3;
 `;
-const Comment = styled.div`
-  padding-left: 30px;
-  padding-right: 30px;
-  margin-top: 30px;
-  h4 {
-    margin-bottom: 10px;
-  }
-  input {
-    all: unset;
-    width: 100%;
-    height: 30px;
-    background-color: #f7f7f7;
-    border-radius: 20px;
-    margin-bottom: 15px;
-  }
-
-  button {
-    all: unset;
-  }
-`;
-const View = styled.div`
-  h4 {
-    font-weight: 700;
-    font-size: 14px;
-    opacity: 0.7;
-  }
-`;
 
 const Detail = () => {
-  const [comment, setComment] = useState("");
-  const [comments, setComments] = useState([]);
+  const { name } = useParams();
+  console.log(name);
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    if (comment.trim() !== "") {
-      setComments([...comments, comment]);
-      setComment("");
-    }
-  };
+  const bakery = All.find((b) => b.name === name);
+
   return (
-    <Wrap>
-      <Logo />
-      <Con>
-        <Ban>
-          <div className="ban" bg={All.url}></div>
-          <div className="title">
-            <h3>앙시앙</h3>
-            <h5>페스츄리 크레페가 맛있는 곳</h5>
-          </div>
-        </Ban>
-        <Break></Break>
+    <>
+      {bakery ? (
+        <>
+          <Wrap>
+            <Logo />
+            <Con>
+              <Ban>
+                <div className="ban" bg={bakery.url}></div>
+                <div className="title">
+                  <h3>{bakery.name}</h3>
+                  <h5>{bakery.ban}</h5>
+                </div>
+              </Ban>
+              <Break></Break>
 
-        <Info>
-          <h4>부산 수영구 광남로 77 1층</h4>
-          <h4>11:30 ~ 20:00</h4>
-          <h4> 화요일 정기휴무 </h4>
-          <h4> 피스타치오 페스츄리 크레페, 굴뚝빵</h4>
-        </Info>
+              <Info>
+                <h4>{bakery.add}</h4>
+                <h4>{bakery.time}</h4>
+                <h4> {bakery.break} </h4>
+                <h4> {bakery.rec}</h4>
+              </Info>
 
-        <Break></Break>
-      </Con>
-      <Comment>
-        <h4>댓글남기기 (질문, 후기 등 자유롭게 남겨주세요!)</h4>
-        <form onSubmit={submitHandler}>
-          <input
-            type="text"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          ></input>
-        </form>
-        <button type="submit">입력</button>
-        <View>
-          <h4>댓글</h4>
-          <ul>
-            {comments.map((c, index) => (
-              <li key={index}>{c}</li>
-            ))}
-          </ul>
-        </View>
-      </Comment>
-    </Wrap>
+              <Break></Break>
+            </Con>
+            <Comment></Comment>
+          </Wrap>
+        </>
+      ) : (
+        <div>찾으시는 정보가 없습니다</div>
+      )}
+    </>
   );
 };
 
