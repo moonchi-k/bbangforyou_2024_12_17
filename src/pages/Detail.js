@@ -2,16 +2,10 @@ import styled from "styled-components";
 import { All } from "../components/All";
 import Comment from "../components/Comment";
 import { Link, useParams } from "react-router-dom";
-import { faArrowLeft, faHouse } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  IoHeartCircleOutline,
-  IoHome,
-  IoLocationOutline,
-  IoTimeOutline,
-} from "react-icons/io5";
+import { IoHome, IoLocationOutline, IoTimeOutline } from "react-icons/io5";
 import { FaRegCalendarTimes } from "react-icons/fa";
 import { LuHeart } from "react-icons/lu";
+import { GiPositionMarker } from "react-icons/gi";
 const Wrap = styled.div`
   max-width: 450px;
   height: 100vh;
@@ -56,7 +50,7 @@ const Home = styled.div`
   border-radius: 30px;
 `;
 const Info = styled.div`
-  width: 90%;
+  width: 95%;
   border-radius: 15px;
   background-color: white;
   padding-left: 20px;

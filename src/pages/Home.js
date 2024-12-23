@@ -1,13 +1,15 @@
 import styled from "styled-components";
-import { CiSearch } from "react-icons/ci";
 import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 import { All } from "../components/All";
 import { New } from "../components/New";
 import { Rec } from "../components/Rec";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import Arr from "../components/Arr";
+import Footer from "../components/Footer";
 
 const Wrap = styled.div`
   max-width: 450px;
@@ -24,21 +26,7 @@ const Wrap = styled.div`
     margin-bottom: 25px;
     width: 100%;
     display: block;
-
-    input {
-      all: unset;
-      width: 380px;
-      box-sizing: border-box;
-      padding: 15px 0 10px 15px;
-      background-color: #f7f0f2;
-      border-radius: 20px;
-      /* margin-top: 25px; */
-      /* margin-bottom: 25px; */
-    }
-
-    ::placeholder {
-      opacity: 0.5;
-    }
+    margin-right: 30px;
   }
 `;
 const Logo = styled.div`
@@ -72,15 +60,29 @@ const TopCon = styled.div`
 `;
 const Title = styled.div``;
 
-const Form = styled.form``;
+const Form = styled.form`
+  width: 100%;
+
+  input {
+    all: unset;
+    box-sizing: border-box;
+    display: block;
+    width: 93%;
+    padding-left: 30px;
+    box-sizing: border-box;
+    padding: 15px 0 10px 15px;
+    background-color: #f7f0f2;
+    border-radius: 20px;
+    /* margin-top: 25px; */
+    /* margin-bottom: 25px; */
+  }
+
+  ::placeholder {
+    opacity: 0.5;
+  }
+`;
 const SecCon = styled.div`
   width: 100%;
-`;
-const Btn = styled.div`
-  width: 100%;
-  display: flex;
-  /* justify-content: space-between; */
-  margin-top: 30px;
 `;
 
 const Res = styled.div`
@@ -91,15 +93,21 @@ const Res = styled.div`
 `;
 
 const ResCon = styled.div`
-  margin-right: 30px;
+  /* margin-right: 30px; */
 `;
 const Img = styled.div`
   background: url(${(props) => props.bg}) no-repeat center / cover;
-  width: 200px;
-  height: 230px;
+  /* width: 200px; */
+  width: 100%;
+  height: 200px;
   display: flex;
   align-items: end;
   border-radius: 15px;
+
+  @media screen and (max-width: 380px) {
+    width: 100%;
+    height: 180px;
+  }
 `;
 const Ban = styled.div`
   width: 100%;
@@ -112,20 +120,27 @@ const Ban = styled.div`
   align-items: center;
   font-weight: 600;
   color: white;
-  font-size: 14px;
+  font-size: 12px;
 `;
 const Desc = styled.div`
   width: 204px;
   h4 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     margin-top: 15px;
     margin-bottom: 6px;
+
+    @media screen and (max-width: 380px) {
+      font-size: 18px;
+    }
   }
 
   h5 {
     font-size: 14px;
     opacity: 0.7;
+    @media screen and (max-width: 380px) {
+      font-size: 14px;
+    }
   }
   display: flex;
   justify-content: space-between;
@@ -140,31 +155,36 @@ const MinCon = styled.div`
     margin-bottom: 20px;
   }
 `;
-const Arr = styled.div`
+
+const Arrs = styled.div`
   display: flex;
 `;
 
-const NewCon = styled.div`
-  margin-right: 25px;
+const Wrapper = styled.div`
+  width: 100%;
+  /* border: 1px solid black; */
+  border-radius: 30px;
+  padding-top: 20px;
+  padding-left: 5px;
+  padding-right: 10px;
+  background-color: rgba(247, 240, 242, 0.4);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 `;
 
 const RecCon = styled.div`
-  margin-right: 25px;
-`;
-const Thumb = styled.div`
-  width: 144px;
-  height: 144px;
-  background: url(${(props) => props.bgimg}) no-repeat center / cover;
-  margin-bottom: 10px;
-  border-radius: 15px;
+  /* margin-right: 25px; */
 `;
 
 const RThumb = styled.div`
-  width: 144px;
-  height: 144px;
+  /* width: 144px; */
+  height: 140px;
   background: url(${(props) => props.recbg}) no-repeat center / cover;
   margin-bottom: 10px;
   border-radius: 15px;
+
+  @media screen and (max-width: 380px) {
+    height: 120px;
+  }
 `;
 const MTitle = styled.div`
   display: flex;
@@ -175,11 +195,27 @@ const MTitle = styled.div`
     margin-top: 7px;
     margin-bottom: 40px;
   }
+
+  @media screen and (max-width: 380px) {
+    font-size: 14px;
+  }
 `;
 
 const params = {
-  spaceBetween: 30,
-  slidesPerView: 1.8,
+  spaceBetween: 20,
+  slidesPerView: 2.3,
+
+  breakpoints: {
+    380: {
+      spaceBetween: 10,
+      slidesPerView: 2.3,
+    },
+  },
+};
+
+const newParams = {
+  spaceBetween: 10,
+  slidesPerView: 2.9,
 };
 
 const Home = () => {
@@ -190,21 +226,12 @@ const Home = () => {
 
   const randomItem = random(All, 5);
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState("");
 
-  const handleInputChange = (event) => {
-    console.log(`1111`);
-    setSearchTerm(event.target.value);
-  };
+  const { register, handleSubmit } = useForm();
 
-  const handleSubmit = (event) => {
-    event.preventDefault(); // 폼 제출 기본 동작을 막음 (페이지 리로드 방지)
-    if (searchTerm.trim()) {
-      // 검색어가 있을 때 detail 페이지로 리디렉션
-      navigate(`/detail/${encodeURIComponent(searchTerm)}`);
-    } else {
-      alert("검색어를 입력하세요!");
-    }
+  const onSubmit = (data) => {
+    console.log("검색어", data.name);
+    navigate(`/detail/${data.name}`);
   };
 
   return (
@@ -217,80 +244,74 @@ const Home = () => {
           <h5>가볼까요?</h5>
         </Title>
       </TopCon>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <input
           type="text"
           placeholder="빵집을 검색해보세요."
-          value={searchTerm}
-          //   onChange={handleInputChange}
+          {...register("name", { required: "검색어를 입력하세요." })}
         />
       </Form>
 
       <SecCon>
         <Res>
-          {randomItem.map((bakery) => (
-            <ResCon key={bakery.name}>
-              <Link to={`/detail/${bakery.name}`}>
-                <Img bg={bakery.url}>
-                  <Ban>{bakery.ban}</Ban>
-                </Img>
-                <Desc>
-                  <Name>
-                    <h4>{bakery.name}</h4>
-                    <h5>{bakery.hash}</h5>
-                  </Name>
-                </Desc>
-              </Link>
-            </ResCon>
-          ))}
+          <Swiper {...params}>
+            {randomItem.map((bakery) => (
+              <SwiperSlide>
+                <ResCon key={bakery.name}>
+                  <Link to={`/detail/${bakery.name}`}>
+                    <Img bg={bakery.url}>
+                      <Ban>{bakery.ban}</Ban>
+                    </Img>
+                    <Desc>
+                      <Name>
+                        <h4>{bakery.name}</h4>
+                        <h5>{bakery.hash}</h5>
+                      </Name>
+                    </Desc>
+                  </Link>
+                </ResCon>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </Res>
       </SecCon>
 
-      <MinCon>
-        <h3>새로 오픈했어요!</h3>
-        <Arr>
-          {New.map((newlist) => (
-            <NewCon>
-              <Thumb bgimg={newlist.url}></Thumb>
-              <MTitle>
-                <h5>{newlist.name}</h5>
-                <FontAwesomeIcon
-                  icon={faBookmark}
-                  style={{
-                    marginTop: "3px",
-                    color: "#7c4614",
-                    width: "18px",
-                    height: "18px",
-                  }}
-                />
-              </MTitle>
-            </NewCon>
-          ))}
-        </Arr>
-      </MinCon>
+      <Wrapper>
+        <MinCon>
+          <h3>새로 오픈했어요!</h3>
+          <Arr />
+        </MinCon>
 
-      <MinCon>
-        <h3>웨이팅 핫플레이스!</h3>
-        <Arr>
-          {Rec.map((reclist) => (
-            <RecCon>
-              <RThumb recbg={reclist.url}></RThumb>
-              <MTitle>
-                <h5>{reclist.name}</h5>
-                <FontAwesomeIcon
-                  icon={faBookmark}
-                  style={{
-                    marginTop: "3px",
-                    color: "#7c4614",
-                    width: "18px",
-                    height: "18px",
-                  }}
-                />
-              </MTitle>
-            </RecCon>
-          ))}
-        </Arr>
-      </MinCon>
+        <MinCon>
+          <h3>웨이팅 핫플레이스!</h3>
+          <Arrs>
+            <Swiper {...newParams}>
+              {Rec.map((reclist) => (
+                <SwiperSlide>
+                  <RecCon>
+                    <Link to={`/detail/${reclist.name}`}>
+                      <RThumb recbg={reclist.url}></RThumb>
+                      <MTitle>
+                        <h5>{reclist.name}</h5>
+                        {/* <FontAwesomeIcon
+                      icon={faBookmark}
+                      style={{
+                        marginTop: "3px",
+                        color: "#7c4614",
+                        width: "18px",
+                        height: "18px",
+                      }}
+                    /> */}
+                      </MTitle>
+                    </Link>
+                  </RecCon>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </Arrs>
+        </MinCon>
+      </Wrapper>
+      <Footer></Footer>
     </Wrap>
   );
 };

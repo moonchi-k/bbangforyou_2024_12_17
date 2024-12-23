@@ -1,13 +1,11 @@
-import { FaRegTrashCan } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { FaArrowCircleUp } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 
 const SComment = styled.div`
   padding: 30px;
   margin-top: 30px;
-  width: 90%;
+  width: 95%;
   background-color: white;
   position: absolute;
   top: 475px;
@@ -87,12 +85,6 @@ const Comment = () => {
       localStorage.setItem(name, JSON.stringify(newComments));
       setComment("");
     }
-  };
-
-  const deleteHandler = (index) => {
-    const newComments = comments.filter((_, i) => i !== index);
-    setComments(newComments);
-    localStorage.setItem("comments", JSON.stringify(newComments));
   };
 
   return (
