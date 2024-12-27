@@ -2,7 +2,9 @@ export const All = [
   {
     id: 0,
     name: "앙시앙",
-    url: `${process.env.PUBLIC_URL}/img/ancient.png`,
+    // url: `${process.env.PUBLIC_URL}/img/ancien.png`,
+    url: "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240816_70%2F1723780179092G3A9Y_JPEG%2FIMG_4779.JPG",
+
     ban: "광안리 신상 핫플",
     hash: "#페스츄리 크레페",
     add: "부산 수영구 광남로 77 1층",
@@ -146,7 +148,8 @@ export const All = [
   {
     id: 12,
     name: "무슈뱅상",
-    url: `${process.env.PUBLIC_URL}/img/monsieur.png`,
+    // url: `${process.env.PUBLIC_URL}/img/monsieur.png`,
+    url: "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20200411_186%2F1586613677353mfDW1_JPEG%2FOLrCmL1EcdWyal52Tqp-4kDb.jpg",
     ban: "2024 블루리본 서베이",
     hash: "#천연발효종",
     add: "부산 수영구 광남로 48번길 19",
@@ -170,7 +173,8 @@ export const All = [
   {
     id: 14,
     name: "올선데이",
-    url: `${process.env.PUBLIC_URL}/img/allsun.jpeg`,
+    // url: `${process.env.PUBLIC_URL}/img/allsun.jpeg`,
+    url: "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230503_176%2F16830926724522f8it_JPEG%2FKakaoTalk_20230502_194153674_02.jpg",
     ban: "유기농 밀가루 사용",
     hash: "#베이글",
     add: "부산 수영구 광안로 61번길 28 1층",

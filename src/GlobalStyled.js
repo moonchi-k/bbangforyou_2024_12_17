@@ -25,6 +25,7 @@ a{
 body {
     /* background-color: #F7F0F2; */
     /* font-family: "Nanum Gothic", serif; */
-    background-color: #f8f7f7;
+    background-color: rgba(248, 247, 247, 0.7);
+    /* opacity: 0.7; */
 }
 `;

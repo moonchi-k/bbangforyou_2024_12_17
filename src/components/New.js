@@ -2,7 +2,8 @@ export const New = [
   {
     id: 0,
     name: "앙시앙",
-    url: `${process.env.PUBLIC_URL}/img/ancient.png`,
+    // url: `${process.env.PUBLIC_URL}/img/ancien.png`,
+    url: "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240816_70%2F1723780179092G3A9Y_JPEG%2FIMG_4779.JPG",
     ban: "광안리 신상 핫플",
     hash: "#페스츄리 크레페",
     add: "부산 수영구 광남로 77 1층",

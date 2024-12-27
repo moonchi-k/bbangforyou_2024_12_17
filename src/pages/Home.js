@@ -15,7 +15,7 @@ const Wrap = styled.div`
   max-width: 450px;
   height: 100vh;
   margin: 0 auto;
-  padding: 50px 0px 0px 30px;
+  padding: 40px 0px 0px 0px;
   background-color: white;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -26,7 +26,9 @@ const Wrap = styled.div`
     margin-bottom: 25px;
     width: 100%;
     display: block;
-    margin-right: 30px;
+    /* margin-right: 30px; */
+    padding-left: 30px;
+    padding-right: 30px;
   }
 `;
 const Logo = styled.div`
@@ -36,15 +38,22 @@ const Logo = styled.div`
   background-image: url(${process.env.PUBLIC_URL}/img/logo.png);
   background-repeat: no-repeat;
   margin: 0 auto;
-  transform: translateX(-15px);
+  margin-bottom: 30px;
+`;
+
+const TWrapper = styled.div`
+  background-color: rgba(247, 240, 242, 0.4);
+  padding-top: 50px;
+  padding-bottom: 70px;
 `;
 const TopCon = styled.div`
-  margin-top: 60px;
+  /* margin-top: 60px; */
   margin-bottom: 20px;
   /* background-color: #7c4614; */
   width: 100%;
   display: flex;
   justify-content: space-between;
+  padding-left: 30px;
   h4 {
     font-family: "RiaSans-ExtraBold";
     color: #7c4614;
@@ -61,14 +70,16 @@ const TopCon = styled.div`
 const Title = styled.div``;
 
 const Form = styled.form`
-  width: 100%;
+  /* width: 100%; */
+  /* padding-left: 30px; */
 
   input {
     all: unset;
     box-sizing: border-box;
     display: block;
-    width: 93%;
-    padding-left: 30px;
+    width: 88%;
+    /* margin-left: 30px; */
+
     box-sizing: border-box;
     padding: 15px 0 10px 15px;
     background-color: #f7f0f2;
@@ -83,12 +94,13 @@ const Form = styled.form`
 `;
 const SecCon = styled.div`
   width: 100%;
+  padding-left: 30px;
 `;
 
 const Res = styled.div`
   width: 100%;
   display: flex;
-  margin-bottom: 70px;
+  /* margin-bottom: 50px; */
   margin-top: 30px;
 `;
 
@@ -152,6 +164,12 @@ const MinCon = styled.div`
   h3 {
     font-size: 22px;
     font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 14px;
+    opacity: 0.4;
     margin-bottom: 20px;
   }
 `;
@@ -162,13 +180,8 @@ const Arrs = styled.div`
 
 const Wrapper = styled.div`
   width: 100%;
-  /* border: 1px solid black; */
-  border-radius: 30px;
-  padding-top: 20px;
-  padding-left: 5px;
-  padding-right: 10px;
-  background-color: rgba(247, 240, 242, 0.4);
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  /* background-color: rgba(247, 240, 242, 0.4); */
+  padding: 60px 20px;
 `;
 
 const RecCon = styled.div`
@@ -238,52 +251,56 @@ const Home = () => {
     <Wrap>
       <Logo />
 
-      <TopCon>
-        <Title>
-          <h4>오늘은 어디로</h4>
-          <h5>가볼까요?</h5>
-        </Title>
-      </TopCon>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          type="text"
-          placeholder="빵집을 검색해보세요."
-          {...register("name", { required: "검색어를 입력하세요." })}
-        />
-      </Form>
+      <TWrapper>
+        <TopCon>
+          <Title>
+            <h4>오늘은 어디로</h4>
+            <h5>가볼까요?</h5>
+          </Title>
+        </TopCon>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <input
+            type="text"
+            placeholder="빵집을 검색해보세요."
+            {...register("name", { required: "검색어를 입력하세요." })}
+          />
+        </Form>
 
-      <SecCon>
-        <Res>
-          <Swiper {...params}>
-            {randomItem.map((bakery) => (
-              <SwiperSlide>
-                <ResCon key={bakery.name}>
-                  <Link to={`/detail/${bakery.name}`}>
-                    <Img bg={bakery.url}>
-                      <Ban>{bakery.ban}</Ban>
-                    </Img>
-                    <Desc>
-                      <Name>
-                        <h4>{bakery.name}</h4>
-                        <h5>{bakery.hash}</h5>
-                      </Name>
-                    </Desc>
-                  </Link>
-                </ResCon>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </Res>
-      </SecCon>
-
+        <SecCon>
+          <Res>
+            <Swiper {...params}>
+              {randomItem.map((bakery) => (
+                <SwiperSlide>
+                  <ResCon key={bakery.name}>
+                    <Link to={`/detail/${bakery.name}`}>
+                      <Img bg={bakery.url}>
+                        <Ban>{bakery.ban}</Ban>
+                      </Img>
+                      <Desc>
+                        <Name>
+                          <h4>{bakery.name}</h4>
+                          <h5>{bakery.hash}</h5>
+                        </Name>
+                      </Desc>
+                    </Link>
+                  </ResCon>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </Res>
+        </SecCon>
+      </TWrapper>
       <Wrapper>
         <MinCon>
           <h3>새로 오픈했어요!</h3>
+          <p>발빠른 빵지순례 빵포유와 함께해요 😋</p>
           <Arr />
         </MinCon>
 
         <MinCon>
           <h3>웨이팅 핫플레이스!</h3>
+          <p>나빼고 다가는 핫플레이스 😮</p>
+
           <Arrs>
             <Swiper {...newParams}>
               {Rec.map((reclist) => (

@@ -10,7 +10,9 @@ const Wrap = styled.div`
   max-width: 450px;
   height: 100vh;
   margin: 0 auto;
-  background-color: #f7f0f2;
+  /* background-color: #f7f0f2; */
+  background-color: rgba(247, 240, 242, 0.4);
+
   overflow: scroll;
   /* padding: 0 20px; */
   position: relative;
@@ -43,7 +45,7 @@ const Home = styled.div`
   left: 30px;
   width: 40px;
   height: 40px;
-  background-color: rgba(247, 240, 242, 0.9);
+  background-color: rgba(247, 240, 242, 0.7);
 
   text-align: center;
   padding-top: 7px;

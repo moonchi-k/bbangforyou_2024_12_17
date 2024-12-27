@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 
 const SArr = styled.div`
   display: flex;
+  margin-bottom: 30px;
 `;
 
 const NewCon = styled.div`
