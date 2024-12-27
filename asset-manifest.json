@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/bbangforyou_2024_12_17/static/css/main.e26c3517.css",
+    "main.js": "/bbangforyou_2024_12_17/static/js/main.76e8fb5b.js",
+    "index.html": "/bbangforyou_2024_12_17/index.html",
+    "main.e26c3517.css.map": "/bbangforyou_2024_12_17/static/css/main.e26c3517.css.map",
+    "main.76e8fb5b.js.map": "/bbangforyou_2024_12_17/static/js/main.76e8fb5b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e26c3517.css",
+    "static/js/main.76e8fb5b.js"
+  ]
+}
